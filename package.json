@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "b": "webpack"
+    "b": "webpack --watch"
   },
   "keywords": [],
   "author": "",

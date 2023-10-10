@@ -14,7 +14,7 @@ for (let i = 0; i < htmlFiles.length; i++) {
     console.log(/(.*)\\(.*)\\(.*)\.html$/gi.exec(file));
     htmlPageList.push(new HtmlWebpackPlugin({
         template: path.resolve(__dirname, htmlFiles[i]),
-        chunks: [pageName],
+        chunks: [folder],
         filename: `html/${folder}/${pageName}.html`,
     }))
 }
@@ -69,5 +69,5 @@ module.exports = {
     },
     plugins: [
         ...htmlPageList
-    ]
+    ],
 }
