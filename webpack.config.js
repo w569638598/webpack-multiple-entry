@@ -1,7 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-
+const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader')
+const devConf = require('./dev.js')
+const prodConf = require('./prod.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 // html文件导出插件配置
 const { globSync } = require('glob')
 const htmlFiles = globSync('./html/**/*.html')
@@ -11,11 +15,10 @@ for (let i = 0; i < htmlFiles.length; i++) {
     const filePath = /(.*\\)(.*)\\(.*)\.html$/gi.exec(file)
     const pageName = filePath[3]
     const folder = filePath[2]
-    console.log(/(.*)\\(.*)\\(.*)\.html$/gi.exec(file));
     htmlPageList.push(new HtmlWebpackPlugin({
         template: path.resolve(__dirname, htmlFiles[i]),
         chunks: [folder],
-        filename: `html/${folder}/${pageName}.html`,
+        filename: `${folder}.html`,
     }))
 }
 
@@ -30,7 +33,6 @@ for (let i = 0; i < jsFiles.length; i++) {
 
 
 // node方法根据js文件生成总体页面
-// const fs = require('fs')
 // const files = fs.readdirSync(path.resolve(__dirname, 'src', '**'))
 // console.log(files);
 // let htmlPageList = []
@@ -47,27 +49,81 @@ for (let i = 0; i < jsFiles.length; i++) {
 //         }
 //     }
 //   }
-module.exports = {
-    mode: 'development',
+
+
+const conf = {
     entry: entryList,
+    // entry: {
+    //     douyin: './src/douyin/douyin.js',
+    // },
+    devServer: {
+        static: './dist',//项目运行目录
+        client: {
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+        },
+    },
+    optimization: {
+        // mergeDuplicateChunks: true,
+    },
+    externals: {
+        Vue: 'vue',
+    },
+    stats: 'errors-only',
     output: {
         filename: 'js/[name].[contenthash:5].js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
+        assetModuleFilename: 'images/[hash][ext][query]'
     },
     module: {
-        rules: [
-            {
-                test: /\.less$/i,
-                use: ['style-loader', 'css-loader', 'less-loader']
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-        ]
+    },
+    resolve: {
+        alias: {
+            '@assets': path.resolve(__dirname, './assets'),
+            '@comp': path.resolve(__dirname, './components'),
+            '@hooks': path.resolve(__dirname, './hooks'),
+        }
     },
     plugins: [
-        ...htmlPageList
+        new webpack.ProvidePlugin({
+            // Vue: 'vue',
+            utils: '../../utils/index', // 指定模块名称而不是文件路径 
+            // ElementPlus: 'element-plus'
+
+        }),
+        ...htmlPageList,
+        // new HtmlWebpackPlugin({
+        //     template: path.resolve(__dirname, 'html/douyin/index.html'),
+
+        //     chunks: ['douyin'],
+        //     filename: `html/douyin/index.html`,
+        // }),
+        // 为css创建文件夹
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            insert: 'body'
+        }),
+        new VueLoaderPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, 'staticResources'), to: 'staticResources' },
+            ],
+        }),
     ],
+}
+module.exports = (env, argv) => {
+    let config = conf
+    if (argv.mode === 'production') {
+        config.module.rules = prodConf.rule
+        config.devServer.client = prodConf.client
+    }
+    if (argv.mode === 'development') {
+        // 做css文件压缩
+        config.module.rules = devConf.rule
+        config.devServer.client = devConf.client
+        config.devtool = 'source-map'
+    }
+    return config
 }

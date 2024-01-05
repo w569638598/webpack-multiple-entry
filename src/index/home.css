@@ -1,0 +1,80 @@
+body,
+html {
+  font-size: 12px;
+  color: #1D2129;
+  padding: 0;
+  margin: 0;
+}
+.btn {
+  cursor: pointer;
+  padding: 9px 15px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #2168FF;
+  display: inline-block;
+}
+.flex {
+  display: flex;
+}
+.flexalignCenter {
+  align-items: center;
+}
+.flexalignEnd {
+  align-items: flex-end;
+}
+.flexalignStart {
+  align-items: flex-start;
+}
+.flexalignBetween {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flexAround {
+  justify-content: space-around;
+}
+.flexBetween {
+  justify-content: space-between;
+}
+.flexEnd {
+  justify-content: flex-end;
+}
+.flexjustifyCenter {
+  justify-content: center;
+}
+.flexwarp {
+  flex-wrap: wrap;
+}
+.line_ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.line2_ellipsis {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.contentCenter {
+  width: 1200px;
+  margin: 0 auto;
+}
+.warpTitleBox {
+  text-align: center;
+  padding: 44px 0;
+}
+.warpTitleBox h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+.warpTitleBox h2:has(+ .desc) {
+  margin: 0;
+}
+@media (max-width: 1200px) {
+  .banner .innerBox {
+    width: calc(100% - 16px);
+    margin: 0 auto;
+  }
+}

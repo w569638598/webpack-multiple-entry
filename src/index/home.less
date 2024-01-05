@@ -1,0 +1,103 @@
+@import '@assets/main.less';
+
+@media(max-width: 1200px) {
+    .banner {
+        width: 100% !important;
+        min-width: 100% !important;
+        background: #E2E8F0 !important;
+        padding-top: 26px;
+        .innerBox {
+            .centerWrap();
+            overflow: hidden;
+            display: block;
+            .left{
+                text-align: center;
+                margin-right: 0 !important;
+                position: relative;
+                z-index: 2;
+                .title{
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+                .desc{
+                    margin-top: 5rem;
+                }
+            }
+            img{
+                width: 80%;
+                margin: 0 auto;
+                display: block;
+                position: relative;
+                z-index: 1;
+                top: -80px;
+            }
+        }
+    }
+    .advantageBox{
+        padding-bottom: 0 !important;
+        &>.title{
+            font-size: @mobileTitleFs !important;
+            padding: @titlePadding !important;
+        }
+        .list {
+            flex-direction: column;
+            .centerWrap();
+            .listItem {
+                width: 100% !important;
+                margin-bottom: 20px;
+                background-size: auto !important;
+                &:last-child{
+                    margin-bottom: 0!important;
+                }
+            }
+        }
+    }
+    .mode{
+        .tabBox{
+            display: block !important;
+            overflow: scroll;
+            .tabWrap{
+                width: 120%;
+                display: flex;
+                justify-content: space-between;
+                p{
+                    white-space: nowrap;  
+                }
+            }
+            img{
+                display: none;
+            }
+        }
+        .conBox{
+            flex-direction: column;
+            .item{
+                width: 100% !important;
+                margin-bottom: 17px;
+                
+            }
+        }
+    }
+    
+    .experience{
+        .contentCenter{
+            justify-content: space-between !important;
+            padding: 16rem !important;
+            img{
+                position: static !important;
+                width: 100rem !important;
+            }
+        }
+        .textWrap{
+            margin-right: 0 !important;
+            margin-top: 0!important;
+            .title{
+                font-size: 18px !important;
+                line-height: 160% !important;
+            }
+            button{
+                padding: 4rem 18rem !important;
+            }
+        }
+    }
+}
+
