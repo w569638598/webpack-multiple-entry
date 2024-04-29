@@ -1,0 +1,149 @@
+@import '@assets/main.less';
+
+
+@media(max-width: 1200px) {
+  .chatBox {
+    .title {
+      padding: @titlePadding !important;
+      font-size: @mobileTitleFs !important;
+    }
+  }
+
+  .supportBox {
+    padding-bottom: 0 !important;
+
+    .wow {
+      margin-bottom: 22rem;
+
+      .title {
+        padding: @titlePadding;
+        padding-bottom: 0;
+        font-size: @mobileTitleFs;
+      }
+
+      .desc {
+        margin-top: 12rem;
+      }
+    }
+
+    .list {
+      .centerWrap();
+
+      .listItem {
+        .centerWrap();
+        margin-bottom: 16rem !important;
+
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+
+  .banner {
+    width: 100% !important;
+    min-width: 100% !important;
+    background: #E2E8F0 !important;
+    padding-top: 26px;
+
+    .line {
+      display: none;
+    }
+
+    .innerBox {
+      .centerWrap();
+      overflow: hidden;
+      display: block;
+
+      .left {
+        text-align: center;
+        margin-right: 0 !important;
+        position: relative;
+        z-index: 2;
+        width: auto !important;
+
+        .title {
+          font-size: 20px;
+          line-height: 28px;
+          margin-top: 10rem;
+        }
+
+        .desc {
+          line-height: 180%;
+          white-space: break-spaces;
+          margin-top: 5rem;
+        }
+      }
+
+      img {
+        width: 80%;
+        margin: 0 auto;
+        display: block;
+        position: relative;
+        z-index: 1;
+        top: -80px;
+      }
+    }
+  }
+}
+
+
+.chatBox {
+  text-align: center;
+  padding-bottom: 48px;
+
+.desc{
+  margin-top: 12px;
+}
+  img {
+    width: 240px;
+    height: 240px;
+  }
+
+}
+
+
+.supportBox {
+  text-align: center;
+  padding-bottom: 48px;
+
+
+  .list {
+    width: 1200px;
+    margin: 0 auto;
+
+    .listItem {
+      width: 384px;
+      border: 1px solid @border-color-primarry;
+      border-radius: 2px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        transform: translateY(-10px);
+        // transform: scale(1.1);
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .title {
+        margin: 16px 0 4px;
+        padding: 0;
+        font-size: @thirdLevel;
+        font-weight: bold;
+      }
+
+      .desc {
+        font-size: 14px;
+        color: @text-color-regular;
+        line-height: 22px;
+      }
+    }
+  }
+}
